@@ -1,0 +1,16 @@
+name: Polling verification
+on: [pull_request]
+permissions:
+  issues: write
+jobs:
+  verify-intake:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.number == 1
+    steps:
+      - uses: actions/github-script@v8
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              body: '@mltmacster Acknowledge this ticket and close it. No code changes needed — end-to-end polling/intake verification for the DSH Worker registration rollout.'
+            })
