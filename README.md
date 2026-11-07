@@ -37,3 +37,8 @@ Read the numbered documents in order; each builds only on the ones before it.
 ## License
 
 [MIT](LICENSE)
+---
+
+## Polling verification
+
+- 2026-11-06 — DSH GitHub polling live-verification commit (REA platform completion plan, Task 3).
