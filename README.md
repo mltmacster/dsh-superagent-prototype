@@ -42,3 +42,7 @@ Read the numbered documents in order; each builds only on the ones before it.
 ## Polling verification
 
 - 2026-11-06 — DSH GitHub polling live-verification commit (REA platform completion plan, Task 3).
+
+## Polling verification
+
+- 2026-11-06 — DSH Worker intake live-verification PR (REA platform completion plan, Task 3).
