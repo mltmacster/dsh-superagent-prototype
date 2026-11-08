@@ -1,18 +1,23 @@
 name: Polling verification
-on: [pull_request]
+on: push
 permissions:
   issues: write
 jobs:
   verify-intake:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.number == 1
+    if: github.ref == 'refs/heads/polling-verification' && github.event_name == 'push'
     steps:
       - uses: actions/github-script@v8
         with:
           script: |
-            github.rest.issues.createComment({
-              issue_number: context.payload.pull_request.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '@mltmacster Acknowledge this ticket and close it. No code changes needed — end-to-end polling/intake verification for the DSH Worker registration rollout.'
-            })
+            const pr = await github.rest.pulls.get({ owner: context.repo.owner, repo: context.repo.repo, pull_number: 1 })
+            if (pr.data.state === 'open') {
+              github.rest.issues.createComment({
+                issue_number: 1,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: '@mltmacster Acknowledge this ticket and close it. No code changes needed — end-to-end polling/intake verification for the DSH Worker registration rollout.'
+              })
+            } else {
+              console.log('PR #1 not open; skipping comment')
+            }
